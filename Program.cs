@@ -10,6 +10,8 @@ namespace AdventOfCode2022
     {
         static void Main(string[] args)
         {
+            Star1.Calculate();
+            Console.ReadKey();
         }
     }
 }
