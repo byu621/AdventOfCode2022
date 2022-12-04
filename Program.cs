@@ -12,8 +12,8 @@ namespace AdventOfCode2022
 
         static void Main(string[] args)
         {
-            Day3.Calculate();
-            Day3.Calculate2();
+            Day4.Star1();
+            Day4.Star2();
             Console.ReadKey();
         }
     }
