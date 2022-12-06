@@ -8,12 +8,10 @@ namespace AdventOfCode2022
 {
     class Program
     {
-
-
         static void Main(string[] args)
         {
-            Day5.Star1();
-            Day5.Star2();
+            Day6.Star1();
+            Day6.Star2();
             Console.ReadKey();
         }
     }
