@@ -103,8 +103,11 @@ Find the signal strength during the 20th, 60th, 100th, 140th, 180th, and 220th c
                     state = current == 0 ? 1 : 2;
                 }
 
+                int modCycle = cycle % 40;
+                if (modCycle == 0) modCycle = 40;
+                Console.WriteLine(modCycle);
                 //during
-                if (cycle == output - 1 || cycle == output || cycle == output + 1)
+                if (modCycle - 1 == output - 1 || modCycle - 1 == output || modCycle - 1 == output + 1)
                 {
                     pattern += '#';
                 } else
