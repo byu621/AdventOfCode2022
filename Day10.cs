@@ -26,54 +26,105 @@ Find the signal strength during the 20th, 60th, 100th, 140th, 180th, and 220th c
     class Day10
     {
         private Dictionary<int, int> dict = new Dictionary<int, int>();
+        private Queue<int> queue = new Queue<int>();
         public void Star1(string input)
         {
-            int output = 1;
-            int cycle = 1;
             string[] lines = File.ReadAllLines(input);
             foreach (string line in lines)
             {
-                //start
                 if (line == "noop")
                 {
-
-                }
-                else
+                    queue.Enqueue(0);
+                } else
                 {
                     int number = int.Parse(line.Split(' ')[1]);
-                    if (!dict.ContainsKey(cycle + 1))
-                    {
-                        dict[cycle + 1] = 0;
-                    }
+                    queue.Enqueue(number);
+                }
+            }
 
-                    dict[cycle + 1] += number;
+            int current = -1;
+            int output = 1;
+            int state = 0; //0
+            int res = 0;
+            for (int cycle = 1; cycle < 230; cycle++)
+            {
+                //start
+                if (state == 0)
+                {
+                    current = queue.Dequeue();
+                    state = current == 0 ? 1 : 2;
                 }
                 //during
 
-                Console.WriteLine($"{cycle} - {output}");
-
-                //after
-                if (dict.ContainsKey(cycle))
+                if (cycle == 20 || cycle == 60 || cycle == 100 || cycle == 140 || cycle == 180 || cycle == 220)
                 {
-                    output += dict[cycle];
+                    Console.WriteLine($"{cycle} - {output}");
+                    res += cycle * output;
                 }
 
-                cycle++;
+                //after
+                state--;
+                if (state == 0)
+                {
+                    output += current;
+                }
             }
 
-            Console.WriteLine(output);
+            Console.WriteLine(res);
         }
 
         public void Star2(string input)
         {
-            int output = 0;
+            string pattern = "";
             string[] lines = File.ReadAllLines(input);
             foreach (string line in lines)
             {
-
+                if (line == "noop")
+                {
+                    queue.Enqueue(0);
+                }
+                else
+                {
+                    int number = int.Parse(line.Split(' ')[1]);
+                    queue.Enqueue(number);
+                }
             }
 
-            Console.WriteLine(output);
+            int current = -1;
+            int output = 1;
+            int state = 0; //0
+            int res = 0;
+            for (int cycle = 1; cycle <= 240; cycle++)
+            {
+                //start
+                if (state == 0)
+                {
+                    current = queue.Dequeue();
+                    state = current == 0 ? 1 : 2;
+                }
+
+                //during
+                if (cycle == output - 1 || cycle == output || cycle == output + 1)
+                {
+                    pattern += '#';
+                } else
+                {
+                    pattern += '.';
+                }
+                if (cycle % 40 == 0)
+                {
+                    pattern += '\n';
+                }
+
+                //after
+                state--;
+                if (state == 0)
+                {
+                    output += current;
+                }
+            }
+
+            Console.WriteLine(pattern);
         }
     }
 }
