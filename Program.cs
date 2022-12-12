@@ -12,8 +12,8 @@ namespace AdventOfCode2022
         {
             new Day12().Star1($"{Environment.CurrentDirectory}/Input/day12sample.txt");
             new Day12().Star1($"{Environment.CurrentDirectory}/Input/day12.txt");
-            //new Day12().Star2($"{Environment.CurrentDirectory}/Input/day12sample.txt");
-            //new Day12().Star2($"{Environment.CurrentDirectory}/Input/day12.txt");
+            new Day12().Star2($"{Environment.CurrentDirectory}/Input/day12sample.txt");
+            new Day12().Star2($"{Environment.CurrentDirectory}/Input/day12.txt");
             Console.ReadKey();
         }
     }

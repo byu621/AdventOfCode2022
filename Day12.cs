@@ -60,7 +60,7 @@ namespace AdventOfCode2022
                 }
             }
 
-            for (int iteration = 0; iteration < 2000; iteration++)
+            for (int iteration = 0; iteration < 500; iteration++)
             {
                 for (int i = 0; i < height; i++)
                 {
@@ -103,7 +103,70 @@ namespace AdventOfCode2022
 
         public void Star2(string input)
         {
+            int startI = 0;
+            int startJ = 0;
 
+            string[] lines = File.ReadAllLines(input);
+            height = lines.Length;
+            width = lines[0].Length;
+
+            array = new int[height, width];
+            real = new int[height, width];
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                width = line.Length;
+                for (int j = 0; j < line.Length; j++)
+                {
+                    array[i, j] = line[j] - 'a';
+
+                    if (array[i, j] == -28)
+                    {
+
+                        real[i, j] = 0;
+                    }
+                    else
+                    {
+                        real[i, j] = int.MaxValue;
+                    }
+
+                    if (array[i, j] == -14)
+                    {
+                        startI = i;
+                        startJ = j;
+                        array[i, j] = 0;
+                    }
+                    else if (array[i, j] == -28)
+                    {
+                        array[i, j] = 25;
+                    }
+                }
+            }
+
+            for (int iteration = 0; iteration < 500; iteration++)
+            {
+                for (int i = 0; i < height; i++)
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        recurse(i, j);
+                    }
+                }
+            }
+
+            int minimum = int.MaxValue;
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    if (array[i, j] == 0)
+                    {
+                        minimum = Math.Min(real[i, j], minimum);
+                    }
+                }
+            }
+
+            Console.WriteLine(minimum);
         }
     }
 }
