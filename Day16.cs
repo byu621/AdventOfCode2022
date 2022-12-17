@@ -30,7 +30,7 @@ namespace AdventOfCode2022
             string[] lines = File.ReadAllLines(input);
             foreach (string line in lines)
             {
-                string[] split = line.Split(new string[] { "Valve " });
+                string[] split = line.Split(new string[] { "Valve " }, StringSplitOptions.RemoveEmptyEntries);
             }
 
             Console.WriteLine(output);
