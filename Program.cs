@@ -10,8 +10,8 @@ namespace AdventOfCode2022
     {
         static void Main(string[] args)
         {
-            new Day14().Star2($"{Environment.CurrentDirectory}/Input/day14sample.txt");
-            new Day14().Star2($"{Environment.CurrentDirectory}/Input/day14.txt");
+            new Day15().Star2($"{Environment.CurrentDirectory}/Input/day15sample.txt", 20);
+            new Day15().Star2($"{Environment.CurrentDirectory}/Input/day15.txt", 4_000_000);
 
             Console.ReadKey();
         }

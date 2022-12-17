@@ -59,16 +59,97 @@ namespace AdventOfCode2022
             Console.WriteLine(seen.Count);
         }
 
-        public void Star2(string input)
+        private Dictionary<int, HashSet<int>> rows = new Dictionary<int, HashSet<int>>();
+        
+        public class Record
         {
-            int output = 0;
+
+            public int sensorX;
+            public int sensorY;
+            public int beaconX;
+            public int beaconY;
+            public int distance;
+
+            public Record(int sensorX, int sensorY, int beaconX, int beaconY, int distance)
+            {
+                this.sensorX = sensorX;
+                this.sensorY = sensorY;
+                this.beaconX = beaconX;
+                this.beaconY = beaconY;
+                this.distance = distance;
+            }
+        }
+
+        private List<Record> records = new List<Record>();
+
+        public void Star2(string input, int limit)
+        {
             string[] lines = File.ReadAllLines(input);
             foreach (string line in lines)
             {
+                string[] split = line.Split(new string[] { "Sensor at ", ": closest beacon is at ", ", ", "x=", "y=" }, StringSplitOptions.RemoveEmptyEntries);
 
+                int sensorX = int.Parse(split[0]);
+                int sensorY = int.Parse(split[1]);
+                int beaconX = int.Parse(split[2]);
+                int beaconY = int.Parse(split[3]);
+
+                records.Add(new Record(sensorX, sensorY, beaconX, beaconY, Math.Abs(sensorX - beaconX) + Math.Abs(sensorY - beaconY)));
             }
 
-            Console.WriteLine(output);
+            records.Sort((a, b) =>
+            {
+                return a.sensorX.CompareTo(b.sensorX);
+            });
+
+
+            for (int y = 0; y <= limit; y++)
+            {
+
+                records.Sort((a, b) =>
+                {
+                    int usableDistanceA = a.distance - Math.Abs(a.sensorY - y);
+                    int minimumA = usableDistanceA >= 0 ? a.sensorX - usableDistanceA : int.MaxValue;
+
+                    int usableDistanceB = b.distance - Math.Abs(b.sensorY - y);
+                    int minimumB = usableDistanceB >= 0 ? b.sensorX - usableDistanceB : int.MaxValue;
+
+                    return minimumA.CompareTo(minimumB);
+                });
+
+
+                int x = 0;
+                foreach (var record in records)
+                {
+                    int usableDistance = record.distance - Math.Abs(record.sensorY - y);
+                    if (usableDistance < 0)
+                    {
+                        continue;
+                    }
+
+                    int minimum = record.sensorX - usableDistance;
+                    int maximum = record.sensorX + usableDistance;
+
+                    if (minimum > x)
+                    {
+                        Console.WriteLine(minimum - x);
+                        long tuning = 4_000_000L * x + y;
+                        Console.WriteLine(tuning);
+                        break;
+                    }
+
+                    x = Math.Max(x, maximum + 1);
+                }
+
+                if (x <= limit)
+                {
+                    long tuning = 4_000_000 * x + y;
+                    Console.WriteLine(tuning);
+                }
+            }
+
+
+            Console.WriteLine(1);
         }
     }
 }
