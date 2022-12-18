@@ -11,8 +11,21 @@ namespace AdventOfCode2022
         static void Main(string[] args)
         {
             //new Day16Star2().Star2($"{Environment.CurrentDirectory}/Input/day16sample.txt");
-            new Day16Star2().Star2($"{Environment.CurrentDirectory}/Input/day16.txt");
-
+            //new Day17().Star1($"{Environment.CurrentDirectory}/Input/day17sample.txt");
+            //Dictionary<int, int> dict = new Dictionary<int, int>();
+            //for (int i = 1; i < 100; i++)
+            //{
+            //    Console.WriteLine(i);
+            //    dict.Add(i, new Day17().Star1($"{Environment.CurrentDirectory}/Input/day17.txt", i));
+            //    Console.WriteLine(dict[i]);
+            //    if (i % 2 == 0 && dict[i] % dict[i / 2] == 0)
+            //    {
+            //        Console.WriteLine("got em");
+            //    }
+            //}
+            //new Day17().Star1($"{Environment.CurrentDirectory}/Input/day17sample.txt", 1);
+            new Day17().Star1($"{Environment.CurrentDirectory}/Input/day17.txt", 1);
+            Console.WriteLine("finished");
             Console.ReadKey();
         }
     }
