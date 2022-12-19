@@ -24,7 +24,9 @@ namespace AdventOfCode2022
             //    }
             //}
             //new Day17().Star1($"{Environment.CurrentDirectory}/Input/day17sample.txt", 1);
-            new Day17().Star1($"{Environment.CurrentDirectory}/Input/day17.txt", 1);
+            //new Day18().Star1($"{Environment.CurrentDirectory}/Input/day18sample.txt");
+            new Day18().Star1($"{Environment.CurrentDirectory}/Input/day18sample.txt");
+            new Day18().Star1($"{Environment.CurrentDirectory}/Input/day18.txt");
             Console.WriteLine("finished");
             Console.ReadKey();
         }
