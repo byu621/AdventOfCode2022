@@ -8,6 +8,8 @@ namespace AdventOfCode2022
 {
     class Program
     {
+
+
         static void Main(string[] args)
         {
             //new Day16Star2().Star2($"{Environment.CurrentDirectory}/Input/day16sample.txt");
@@ -25,8 +27,8 @@ namespace AdventOfCode2022
             //}
             //new Day17().Star1($"{Environment.CurrentDirectory}/Input/day17sample.txt", 1);
             //new Day18().Star1($"{Environment.CurrentDirectory}/Input/day18sample.txt");
-            new Day18().Star1($"{Environment.CurrentDirectory}/Input/day18sample.txt");
-            new Day18().Star1($"{Environment.CurrentDirectory}/Input/day18.txt");
+            //new Day19().Star1($"{Environment.CurrentDirectory}/Input/day19sample.txt");
+            new Day19().Star1($"{Environment.CurrentDirectory}/Input/day19.txt");
             Console.WriteLine("finished");
             Console.ReadKey();
         }
