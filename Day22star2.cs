@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2022
 {
-    class Day22
+    class Day22Star2
     {
         struct Position
         {
@@ -29,7 +29,6 @@ namespace AdventOfCode2022
         private int direction = 0; // 0 -> right , 1 -> down , 2 -> left, 3 -> up
         public void Star1(string input)
         {
-            int output = 0;
             string[] lines = File.ReadAllLines(input);
             int row = 0;
             foreach (string line in lines)
@@ -79,27 +78,7 @@ namespace AdventOfCode2022
                     int value = int.Parse(move);
                     for (int i = 0; i < value; i++)
                     {
-                        Position nextPosition = new Position();
-                        if (direction == 0)
-                        {
-                            nextPosition.row = currentPosition.row;
-                            nextPosition.col = currentPosition.col + 1;
-                        } else if (direction == 1)
-                        {
-                            nextPosition.row = currentPosition.row + 1;
-                            nextPosition.col = currentPosition.col;
-                        }
-                        else if (direction == 2)
-                        {
-                            nextPosition.row = currentPosition.row;
-                            nextPosition.col = currentPosition.col - 1;
-                        }
-                        else if (direction == 3)
-                        {
-                            nextPosition.row = currentPosition.row - 1;
-                            nextPosition.col = currentPosition.col;
-                        }
-
+                        Position nextPosition = MoveInDirection();
                         if (map.ContainsKey(nextPosition))
                         {
                             if (map[nextPosition]) // wall
@@ -111,35 +90,7 @@ namespace AdventOfCode2022
                         }
                         else
                         {
-                            if (direction == 0)
-                            {
-                                while (map.ContainsKey(new Position(nextPosition.row, nextPosition.col - 1)))
-                                {
-                                    nextPosition.col = nextPosition.col - 1;
-                                }
-                            }
-                            else if (direction == 1)
-                            {
-                                while (map.ContainsKey(new Position(nextPosition.row - 1, nextPosition.col)))
-                                {
-                                    nextPosition.row = nextPosition.row - 1;
-                                }
-                            }
-                            else if (direction == 2)
-                            {
-                                while (map.ContainsKey(new Position(nextPosition.row, nextPosition.col + 1)))
-                                {
-                                    nextPosition.col = nextPosition.col + 1;
-                                }
-                            }
-                            else if (direction == 3)
-                            {
-                                while (map.ContainsKey(new Position(nextPosition.row + 1, nextPosition.col)))
-                                {
-                                    nextPosition.row = nextPosition.row + 1;
-                                }
-                            }
-
+                            nextPosition = MoveOffSideCube(nextPosition);
                             if (map[nextPosition])
                             {
                                 break;
@@ -152,6 +103,65 @@ namespace AdventOfCode2022
             }
 
             Console.WriteLine(1000*currentPosition.row + 4*currentPosition.col + direction);
+        }
+
+        private Position MoveOffSideCube(Position position)
+        {
+            if (direction == 0)
+            {
+                while (map.ContainsKey(new Position(position.row, position.col - 1)))
+                {
+                    position.col = position.col - 1;
+                }
+            }
+            else if (direction == 1)
+            {
+                while (map.ContainsKey(new Position(position.row - 1, position.col)))
+                {
+                    position.row = position.row - 1;
+                }
+            }
+            else if (direction == 2)
+            {
+                while (map.ContainsKey(new Position(position.row, position.col + 1)))
+                {
+                    position.col = position.col + 1;
+                }
+            }
+            else if (direction == 3)
+            {
+                while (map.ContainsKey(new Position(position.row + 1, position.col)))
+                {
+                    position.row = position.row + 1;
+                }
+            }
+            return position;
+        }
+
+        private Position MoveInDirection()
+        {
+            Position nextPosition = new Position();
+            if (direction == 0)
+            {
+                nextPosition.row = currentPosition.row;
+                nextPosition.col = currentPosition.col + 1;
+            }
+            else if (direction == 1)
+            {
+                nextPosition.row = currentPosition.row + 1;
+                nextPosition.col = currentPosition.col;
+            }
+            else if (direction == 2)
+            {
+                nextPosition.row = currentPosition.row;
+                nextPosition.col = currentPosition.col - 1;
+            }
+            else if (direction == 3)
+            {
+                nextPosition.row = currentPosition.row - 1;
+                nextPosition.col = currentPosition.col;
+            }
+            return nextPosition;
         }
 
         private void ProcessInput(string line)
@@ -173,18 +183,6 @@ namespace AdventOfCode2022
             }
 
             moves.Add(line.Substring(a, b - a));
-        }
-
-        public void Star2(string input)
-        {
-            int output = 0;
-            string[] lines = File.ReadAllLines(input);
-            foreach (string line in lines)
-            {
-
-            }
-
-            Console.WriteLine(output);
         }
     }
 }
