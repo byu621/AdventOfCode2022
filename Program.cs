@@ -14,8 +14,8 @@ namespace AdventOfCode2022
         {
             //new Day20().Star1($"{Environment.CurrentDirectory}/Input/day20sample.txt");
             //new Day21().Star2($"{Environment.CurrentDirectory}/Input/day21sample.txt");
-            new Day22Star2().Star1($"{Environment.CurrentDirectory}/Input/day22sample.txt");
-            new Day22Star2().Star1($"{Environment.CurrentDirectory}/Input/day22.txt");
+            new Day23().Star1($"{Environment.CurrentDirectory}/Input/day23sample.txt");
+            new Day23().Star1($"{Environment.CurrentDirectory}/Input/day23.txt");
             Console.WriteLine("finished");
             Console.ReadKey();
         }
